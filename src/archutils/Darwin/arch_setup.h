@@ -16,9 +16,13 @@ extern "C" int sm_main( int argc, char *argv[] );
 // CGFlushDrawable() performs a glFlush() and the docs say not to call glFlush()
 #define NO_GL_FLUSH
 
+#if defined(__arm64__) || defined(__aarch64__)
+#define CPU_AARCH64
+#elif defined(__i386__) || defined(__x86_64__)
 #define CPU_X86
 #ifndef BACKTRACE_METHOD_X86_DARWIN
 #define BACKTRACE_METHOD_X86_DARWIN
+#endif
 #endif
 #define BACKTRACE_LOOKUP_METHOD_DLADDR
 
